@@ -123,6 +123,22 @@ class LinkedList {
       }
     }
   }
+
+  toString() {
+    let nodeValues = [];
+    let currentNode = this.head;
+    if (this.head === null) {
+      return;
+    }
+
+    while (currentNode !== null) {
+      nodeValues.push(`( ${currentNode.value} ) -> `);
+      currentNode = currentNode.nextNode;
+    }
+    nodeValues.push("null");
+
+    return nodeValues.join(" ");
+  }
 }
 
 class Node {
