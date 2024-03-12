@@ -4,7 +4,27 @@ class LinkedList {
   }
 
   append(value) {
-    nextNode = value;
+    if (this.head === null) {
+      this.head = value;
+    } else {
+      let lastNode = this.head;
+      while (lastNode.nextNode !== null) {
+        lastNode = lastNode.nextNode;
+      }
+      if (lastNode.nextNode === null) {
+        lastNode.nextNode = value;
+      }
+    }
+  }
+
+  prepend(value) {
+    if (this.head === null) {
+      this.head = value;
+    } else {
+      let oldHead = this.head;
+      this.head = value;
+      this.head.nextNode = oldHead;
+    }
   }
 }
 
