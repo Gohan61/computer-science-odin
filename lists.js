@@ -36,6 +36,18 @@ class LinkedList {
     }
     return count;
   }
+
+  headFirst() {
+    return this.head.value;
+  }
+
+  tail() {
+    let lastNode = this.head;
+    while (lastNode.nextNode !== null) {
+      lastNode = lastNode.nextNode;
+    }
+    return lastNode.value;
+  }
 }
 
 class Node {
