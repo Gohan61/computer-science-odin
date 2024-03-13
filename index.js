@@ -75,6 +75,16 @@ function HashMap() {
     return valuesInHashMap.flat();
   };
 
+  const entries = () => {
+    const keyValueInHashMap = [];
+
+    hashBucket.forEach((item) => {
+      keyValueInHashMap.push(list.keyValueFromList(item).flat());
+    });
+
+    return keyValueInHashMap;
+  };
+
   return {
     hash,
     set,
@@ -86,6 +96,7 @@ function HashMap() {
     clear,
     keys,
     values,
+    entries,
   };
 }
 

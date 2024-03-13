@@ -176,6 +176,21 @@ export class LinkedList {
     return nodeValues;
   }
 
+  keyValueFromList(item) {
+    let nodeValues = [];
+    let currentNode = item.head;
+    if (currentNode === null) {
+      return;
+    }
+
+    while (currentNode !== null) {
+      nodeValues.push(currentNode.value);
+      currentNode = currentNode.nextNode;
+    }
+
+    return nodeValues;
+  }
+
   removeFromList(key, index, hashBucket) {
     if (hashBucket[index]) {
       let currentNode = hashBucket[index].head;
