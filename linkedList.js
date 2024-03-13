@@ -146,20 +146,19 @@ export class LinkedList {
     }
   }
 
-  toString() {
+  keysFromList(item) {
     let nodeValues = [];
-    let currentNode = this.head;
-    if (this.head === null) {
+    let currentNode = item.head;
+    if (currentNode === null) {
       return;
     }
 
     while (currentNode !== null) {
-      nodeValues.push(`( ${currentNode.value} ) -> `);
+      nodeValues.push(currentNode.value[0]);
       currentNode = currentNode.nextNode;
     }
-    nodeValues.push("null");
 
-    return nodeValues.join(" ");
+    return nodeValues;
   }
 
   removeFromList(key, index, hashBucket) {

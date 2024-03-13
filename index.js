@@ -56,7 +56,16 @@ function HashMap() {
     hashBucket.splice(0);
   };
 
-  return { hash, set, hashBucket, get, has, remove, length, clear };
+  const keys = () => {
+    const keysInHashMap = [];
+
+    hashBucket.forEach((item) => {
+      keysInHashMap.push(list.keysFromList(item));
+    });
+    return keysInHashMap.flat();
+  };
+
+  return { hash, set, hashBucket, get, has, remove, length, clear, keys };
 }
 
 const hashMapObj = HashMap();
