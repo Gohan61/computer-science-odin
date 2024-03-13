@@ -124,6 +124,28 @@ export class LinkedList {
     }
   }
 
+  findIndex(value) {
+    let currentNode = this.head;
+    let count = 0;
+
+    if (currentNode.value[0] === value) {
+      return count;
+    } else {
+      count++;
+      currentNode = currentNode.nextNode;
+      while (currentNode.value[0] !== value) {
+        currentNode = currentNode.nextNode;
+        if (currentNode === null) {
+          return null;
+        }
+        count++;
+      }
+      if (currentNode.value[0] === value) {
+        return count;
+      }
+    }
+  }
+
   toString() {
     let nodeValues = [];
     let currentNode = this.head;
