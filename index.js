@@ -65,7 +65,28 @@ function HashMap() {
     return keysInHashMap.flat();
   };
 
-  return { hash, set, hashBucket, get, has, remove, length, clear, keys };
+  const values = () => {
+    const valuesInHashMap = [];
+
+    hashBucket.forEach((item) => {
+      valuesInHashMap.push(list.valuesFromList(item));
+    });
+
+    return valuesInHashMap.flat();
+  };
+
+  return {
+    hash,
+    set,
+    hashBucket,
+    get,
+    has,
+    remove,
+    length,
+    clear,
+    keys,
+    values,
+  };
 }
 
 const hashMapObj = HashMap();
