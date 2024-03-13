@@ -106,20 +106,20 @@ export class LinkedList {
     let currentNode = this.head;
     let count = 0;
 
-    if (currentNode.value === value) {
-      return count;
+    if (currentNode.value[0] === value) {
+      return currentNode.value[1];
     } else {
       count++;
       currentNode = currentNode.nextNode;
-      while (currentNode.value !== value) {
+      while (currentNode.value[0] !== value) {
         currentNode = currentNode.nextNode;
         if (currentNode === null) {
           return null;
         }
         count++;
       }
-      if (currentNode.value === value) {
-        return count;
+      if (currentNode.value[0] === value) {
+        return currentNode.value[1];
       }
     }
   }

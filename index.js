@@ -12,11 +12,13 @@ function HashMap() {
       hashCode = primeNumber * hashCode + key.charCodeAt(i);
       hashCode = hashCode % 16;
     }
+
     return hashCode;
   };
 
   const set = (key, value) => {
     const index = hash(key);
+
     if (!hashBucket[index]) {
       hashBucket[index] = new LinkedList();
     }
@@ -24,7 +26,13 @@ function HashMap() {
     hashBucket[index].append(new Node([key, value]));
   };
 
-  return { hash, set, hashBucket };
+  const get = (key) => {
+    const index = hash(key);
+
+    return hashBucket[index].find(key);
+  };
+
+  return { hash, set, hashBucket, get };
 }
 
 const hashMapObj = HashMap();
