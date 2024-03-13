@@ -44,7 +44,15 @@ function HashMap() {
     return list.removeFromList(key, index, hashBucket);
   };
 
-  return { hash, set, hashBucket, get, has, remove };
+  const length = (key) => {
+    let count = 0;
+    hashBucket.forEach((item) => {
+      count += item.size();
+    });
+    return count;
+  };
+
+  return { hash, set, hashBucket, get, has, remove, length };
 }
 
 const hashMapObj = HashMap();
