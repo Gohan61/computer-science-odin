@@ -52,7 +52,11 @@ function HashMap() {
     return count;
   };
 
-  return { hash, set, hashBucket, get, has, remove, length };
+  const clear = () => {
+    hashBucket.splice(0);
+  };
+
+  return { hash, set, hashBucket, get, has, remove, length, clear };
 }
 
 const hashMapObj = HashMap();
