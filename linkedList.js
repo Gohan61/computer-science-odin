@@ -86,18 +86,18 @@ export class LinkedList {
   contains(inputValue) {
     let currentNode = this.head;
 
-    if (currentNode.value === inputValue) {
+    if (currentNode.value[0] === inputValue) {
       return true;
     }
     currentNode = currentNode.nextNode;
 
-    while (currentNode.value !== inputValue) {
+    while (currentNode.value[0] !== inputValue) {
       currentNode = currentNode.nextNode;
       if (currentNode === null) {
         return false;
       }
     }
-    if (currentNode.value === inputValue) {
+    if (currentNode.value[0] === inputValue) {
       return true;
     }
   }

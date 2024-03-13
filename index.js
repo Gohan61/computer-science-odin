@@ -32,7 +32,13 @@ function HashMap() {
     return hashBucket[index].find(key);
   };
 
-  return { hash, set, hashBucket, get };
+  const has = (key) => {
+    const index = hash(key);
+
+    return hashBucket[index].contains(key);
+  };
+
+  return { hash, set, hashBucket, get, has };
 }
 
 const hashMapObj = HashMap();
