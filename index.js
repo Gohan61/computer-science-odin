@@ -38,7 +38,14 @@ function HashMap() {
     return hashBucket[index].contains(key);
   };
 
-  return { hash, set, hashBucket, get, has };
+  const remove = (key) => {
+    const index = hash(key);
+
+    return list.removeFromList(key, index, hashBucket);
+  };
+
+  return { hash, set, hashBucket, get, has, remove };
 }
 
 const hashMapObj = HashMap();
+const list = new LinkedList();

@@ -161,6 +161,29 @@ export class LinkedList {
 
     return nodeValues.join(" ");
   }
+
+  removeFromList(key, index, hashBucket) {
+    if (hashBucket[index]) {
+      let currentNode = hashBucket[index].head;
+
+      if (currentNode.value[0] === key) {
+        hashBucket[index].head = currentNode.nextNode;
+        return true;
+      }
+      currentNode = currentNode.nextNode;
+
+      while (currentNode.value[0] !== key) {
+        currentNode = currentNode.nextNode;
+      }
+      if (currentNode.value[0] === key) {
+        currentNode = currentNode.nextNode;
+        hashBucket[index] = currentNode;
+
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 export class Node {
