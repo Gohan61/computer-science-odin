@@ -1,1 +1,0 @@
-Creating linked lists in Javascript with several other functions
