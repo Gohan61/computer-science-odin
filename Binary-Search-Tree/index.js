@@ -181,4 +181,30 @@ class Tree {
     }
     return treeValues;
   }
+
+  height(node = this.root) {
+    if (!node) {
+      return -1;
+    }
+
+    return 1 + Math.max(this.height(node.left), this.height(node.right));
+  }
+
+  depth(node, root = this.root, count = 0) {
+    if (node.data === root.data) {
+      return count;
+    } else if (node.data < root.data) {
+      if (root.left === null) {
+        return null;
+      } else {
+        return this.depth(node, root.left, ++count);
+      }
+    } else {
+      if (root.right === null) {
+        return null;
+      } else {
+        return this.depth(node, root.right, ++count);
+      }
+    }
+  }
 }
