@@ -106,4 +106,14 @@ class Tree {
       return (this.root = root);
     }
   }
+
+  find(value, root = this.root) {
+    if (root.data === value) {
+      return root;
+    } else if (value < root.data) {
+      return this.find(value, root.left);
+    } else if (value > root.data) {
+      return this.find(value, root.right);
+    }
+  }
 }
