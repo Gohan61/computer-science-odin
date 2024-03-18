@@ -63,4 +63,47 @@ class Tree {
     };
     prettyPrint(node);
   }
+
+  delete(num, root = this.root) {
+    if (root === null) {
+      return root;
+    }
+
+    if (root.data > num) {
+      root.left = this.delete(num, root.left);
+      return root;
+    } else if (root.data < num) {
+      root.right = this.delete(num, root.right);
+      return root;
+    }
+
+    if (root.left === null) {
+      let temp = root.right;
+      delete root.data;
+      return temp;
+    } else if (root.right === null) {
+      let temp = root.left;
+      delete root.data;
+      return temp;
+    } else {
+      let parent = root;
+
+      let child = root.right;
+      while (child.left !== null) {
+        parent = child;
+        child = child.left;
+      }
+
+      if (parent !== root) {
+        parent.left = parent.right;
+      } else {
+        parent.right = child.right;
+      }
+
+      root.data = child.data;
+
+      delete child.data;
+      return (this.root = root);
+    }
+  }
 }
