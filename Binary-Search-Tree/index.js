@@ -137,4 +137,48 @@ class Tree {
     }
     return treeValues;
   }
+
+  inOrder(root = this.root, treeValues = [], callback = null) {
+    if (root) {
+      this.inOrder(root.left, treeValues);
+
+      treeValues.push(root.data);
+
+      this.inOrder(root.right, treeValues);
+    }
+
+    if (callback) {
+      treeValues.forEach((node) => callback(node));
+    }
+    return treeValues;
+  }
+
+  preOrder(root = this.root, treeValues = [], callback = null) {
+    if (root) {
+      treeValues.push(root.data);
+
+      this.preOrder(root.left, treeValues);
+
+      this.preOrder(root.right, treeValues);
+    }
+    if (callback) {
+      treeValues.forEach((node) => callback(node));
+    }
+    return treeValues;
+  }
+
+  postOrder(root = this.root, treeValues = [], callback = null) {
+    if (root) {
+      this.postOrder(root.left, treeValues);
+
+      this.postOrder(root.right, treeValues);
+
+      treeValues.push(root.data);
+    }
+
+    if (callback) {
+      treeValues.forEach((node) => callback(node));
+    }
+    return treeValues;
+  }
 }
