@@ -116,4 +116,25 @@ class Tree {
       return this.find(value, root.right);
     }
   }
+
+  levelOrder(callback = null) {
+    const orderQueue = [];
+    const treeValues = [];
+    let currentNode = this.root;
+
+    orderQueue.push(this.root);
+    while (orderQueue.length !== 0) {
+      treeValues.push(currentNode.data);
+      if (currentNode.left !== null) {
+        orderQueue.push(currentNode.left);
+      }
+      if (currentNode.right !== null) {
+        orderQueue.push(currentNode.right);
+      }
+      currentNode = orderQueue[1];
+      if (callback) callback(orderQueue[1]);
+      orderQueue.shift();
+    }
+    return treeValues;
+  }
 }
