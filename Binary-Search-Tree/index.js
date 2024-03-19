@@ -243,3 +243,40 @@ class Tree {
     return this.buildTree(nodes);
   }
 }
+
+function randomNumbers() {
+  let i = 11;
+  const numbersArray = [];
+  while (i >= 0) {
+    numbersArray.push(Math.floor(Math.random() * 100));
+    i--;
+  }
+  return numbersArray;
+}
+
+// Driver Script
+
+// Build tree with random numbers
+const tree = new Tree(randomNumbers());
+tree.buildTree();
+
+// Check if tree is balanced and call in pre, post and inorder
+console.log(tree.isBalanced());
+console.log(tree.preOrder());
+console.log(tree.postOrder());
+console.log(tree.inOrder());
+
+// Insert new numbers
+tree.insert(101);
+tree.insert(200);
+tree.insert(304);
+
+// Check if tree is balanced again and rebalance if not
+console.log(tree.isBalanced());
+tree.rebalance();
+
+// Call in pre, post and inorder
+console.log(tree.isBalanced());
+console.log(tree.preOrder());
+console.log(tree.postOrder());
+console.log(tree.inOrder());
