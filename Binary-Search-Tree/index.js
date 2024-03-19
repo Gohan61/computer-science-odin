@@ -184,7 +184,7 @@ class Tree {
 
   height(node = this.root) {
     if (!node) {
-      return -1;
+      return 0;
     }
 
     return 1 + Math.max(this.height(node.left), this.height(node.right));
@@ -206,5 +206,24 @@ class Tree {
         return this.depth(node, root.right, ++count);
       }
     }
+  }
+
+  isBalanced(root = this.root) {
+    if (root === null) {
+      return true;
+    }
+
+    let leftHeight = this.height(root.left);
+    let rightHeight = this.height(root.right);
+
+    if (
+      Math.abs(leftHeight - rightHeight) <= 1 &&
+      this.isBalanced(root.left) === true &&
+      this.isBalanced(root.right) === true
+    ) {
+      return true;
+    }
+
+    return false;
   }
 }
