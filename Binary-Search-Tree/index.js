@@ -12,8 +12,8 @@ class Tree {
     this.root = null;
   }
 
-  buildTree() {
-    const sortedArray = [...new Set(this.array)].sort((a, b) => a - b);
+  buildTree(array = this.array) {
+    const sortedArray = [...new Set(array)].sort((a, b) => a - b);
     let start = 0;
     let end = sortedArray.length - 1;
 
@@ -225,5 +225,21 @@ class Tree {
     }
 
     return false;
+  }
+
+  storeBSTNodes(root = this.root, nodes) {
+    if (root === null) {
+      return;
+    }
+
+    this.storeBSTNodes(root.left, nodes), nodes.push(root.data);
+    this.storeBSTNodes(root.right, nodes);
+  }
+
+  rebalance(root = this.root) {
+    const nodes = [];
+    this.storeBSTNodes(root, nodes);
+
+    return this.buildTree(nodes);
   }
 }
