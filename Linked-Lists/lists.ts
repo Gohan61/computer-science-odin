@@ -1,8 +1,11 @@
-class LinkedList {
+class LinkedList<T> {
+  head: NodeType<T> | null;
+
   constructor(head = null) {
     this.head = head;
   }
-  append(value) {
+
+  append(value: NodeType<T> | null) {
     if (this.head === null) {
       this.head = value;
     } else {
@@ -15,15 +18,17 @@ class LinkedList {
       }
     }
   }
-  prepend(value) {
+
+  prepend(value: NodeType<T> | null) {
     if (this.head === null) {
       this.head = value;
     } else {
       let oldHead = this.head;
       this.head = value;
-      this.head.nextNode = oldHead;
+      this.head!.nextNode = oldHead;
     }
   }
+
   size() {
     let count = 0;
     let node = this.head;
@@ -33,6 +38,7 @@ class LinkedList {
     }
     return count;
   }
+
   headFirst() {
     if (this.head === null) {
       return null;
@@ -40,6 +46,7 @@ class LinkedList {
       return this.head.value;
     }
   }
+
   tail() {
     let lastNode = this.head;
     if (lastNode) {
@@ -51,9 +58,11 @@ class LinkedList {
       return null;
     }
   }
-  at(index) {
+
+  at(index: number | null) {
     let currentNode = this.head;
     let count = 0;
+
     while (currentNode) {
       if (count === index) {
         return currentNode.value;
@@ -62,79 +71,69 @@ class LinkedList {
       currentNode = currentNode.nextNode;
     }
   }
+
   pop() {
     if (!this.head) {
       return null;
     }
+
     if (!this.head.nextNode) {
       this.head = null;
       return;
     }
+
     let previous = this.head;
     let tail = this.head.nextNode;
+
     while (tail.nextNode !== null) {
       previous = tail;
       tail = tail.nextNode;
     }
+
     previous.nextNode = null;
   }
-  contains(inputValue) {
+
+  contains(inputValue: string | null) {
     let currentNode = this.head;
+
     if (currentNode) {
       if (currentNode.value === inputValue) {
         return true;
       }
       currentNode = currentNode.nextNode;
-      while (
-        (currentNode === null || currentNode === void 0
-          ? void 0
-          : currentNode.value) &&
-        currentNode.value !== inputValue
-      ) {
+
+      while (currentNode?.value && currentNode.value !== inputValue) {
         currentNode = currentNode.nextNode;
         if (currentNode === null) {
           return false;
         }
       }
-      if (
-        (currentNode === null || currentNode === void 0
-          ? void 0
-          : currentNode.value) &&
-        currentNode.value === inputValue
-      ) {
+      if (currentNode?.value && currentNode.value === inputValue) {
         return true;
       }
     } else {
       return null;
     }
   }
-  find(value) {
+
+  find(value: string | null) {
     let currentNode = this.head;
     let count = 0;
+
     if (currentNode) {
       if (currentNode.value === value) {
         return count;
       } else {
         count++;
         currentNode = currentNode.nextNode;
-        while (
-          (currentNode === null || currentNode === void 0
-            ? void 0
-            : currentNode.value) &&
-          currentNode.value !== value
-        ) {
+        while (currentNode?.value && currentNode.value !== value) {
           currentNode = currentNode.nextNode;
           if (currentNode === null) {
             return null;
           }
           count++;
         }
-        if (
-          (currentNode === null || currentNode === void 0
-            ? void 0
-            : currentNode.value) &&
-          currentNode.value === value
-        ) {
+        if (currentNode?.value && currentNode.value === value) {
           return count;
         }
       }
@@ -142,42 +141,35 @@ class LinkedList {
       return null;
     }
   }
+
   toString() {
-    let nodeValues = [];
+    let nodeValues: string[] = [];
     let currentNode = this.head;
     if (this.head === null) {
       return;
     }
+
     while (currentNode !== null) {
       nodeValues.push(`( ${currentNode.value} ) -> `);
       currentNode = currentNode.nextNode;
     }
     nodeValues.push("null");
+
     return nodeValues.join(" ");
   }
 }
-class NodeItem {
+
+class NodeItem<T> {
+  value: string | null;
+  nextNode: NodeItem<T> | null;
+
   constructor(value = null) {
     this.value = value;
     this.nextNode = null;
   }
 }
 
-const list = new LinkedList();
-list.append(new NodeItem("dog"));
-list.append(new NodeItem("cat"));
-list.append(new NodeItem("parrot"));
-list.append(new NodeItem("hamster"));
-
-console.log(list.toString());
-console.log(list.find("dog"));
-console.log(list.contains("cat"));
-console.log(list.pop());
-console.log(list.toString());
-console.log(list.at(2));
-console.log(list.tail());
-console.log(list.headFirst());
-console.log(list.size());
-console.log(list.append(new NodeItem("snake")));
-console.log(list.prepend(new NodeItem("turtle")));
-console.log(list.toString());
+interface NodeType<T> {
+  value: string | null;
+  nextNode: NodeType<T> | null;
+}
