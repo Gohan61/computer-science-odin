@@ -1,145 +1,110 @@
 export class LinkedList {
-  constructor(head = null) {
-    this.head = head;
-  }
-
-  append(value) {
-    if (this.head === null) {
-      this.head = value;
-    } else {
-      let lastNode = this.head;
-      while (lastNode.nextNode !== null) {
-        lastNode = lastNode.nextNode;
-      }
-      if (lastNode.nextNode === null) {
-        lastNode.nextNode = value;
-      }
+    head;
+    constructor(head = null) {
+        this.head = head;
     }
-  }
-
-  size() {
-    let count = 0;
-    let node = this.head;
-    while (node) {
-      count++;
-      node = node.nextNode;
-    }
-    return count;
-  }
-
-  contains(inputValue) {
-    let currentNode = this.head;
-
-    if (currentNode.value[0] === inputValue) {
-      return true;
-    }
-    currentNode = currentNode.nextNode;
-
-    while (currentNode.value[0] !== inputValue) {
-      currentNode = currentNode.nextNode;
-      if (currentNode === null) {
-        return false;
-      }
-    }
-    if (currentNode.value[0] === inputValue) {
-      return true;
-    }
-  }
-
-  find(value) {
-    let currentNode = this.head;
-    let count = 0;
-
-    if (currentNode.value[0] === value) {
-      return currentNode.value[1];
-    } else {
-      count++;
-      currentNode = currentNode.nextNode;
-      while (currentNode.value[0] !== value) {
-        currentNode = currentNode.nextNode;
-        if (currentNode === null) {
-          return null;
+    append(node) {
+        if (this.head === null) {
+            this.head = node;
         }
-        count++;
-      }
-      if (currentNode.value[0] === value) {
-        return currentNode.value[1];
-      }
+        else {
+            let lastNode = this.head;
+            while (lastNode.nextNode !== null) {
+                lastNode = lastNode.nextNode;
+            }
+            if (lastNode.nextNode === null) {
+                lastNode.nextNode = node;
+            }
+        }
     }
-  }
-
-  keysFromList(item) {
-    let nodeValues = [];
-    let currentNode = item.head;
-    if (currentNode === null) {
-      return;
+    size() {
+        let count = 0;
+        let node = this.head;
+        while (node) {
+            count++;
+            node = node.nextNode;
+        }
+        return count;
     }
-
-    while (currentNode !== null) {
-      nodeValues.push(currentNode.value[0]);
-      currentNode = currentNode.nextNode;
+    contains(key) {
+        let currentNode = this.head;
+        while (currentNode) {
+            if (currentNode.key === key) {
+                return true;
+            }
+            currentNode = currentNode.nextNode;
+        }
+        return false;
     }
-
-    return nodeValues;
-  }
-
-  valuesFromList(item) {
-    let nodeValues = [];
-    let currentNode = item.head;
-    if (currentNode === null) {
-      return;
+    find(key) {
+        let currentNode = this.head;
+        while (currentNode) {
+            if (currentNode.key === key) {
+                return currentNode.value;
+            }
+            currentNode = currentNode.nextNode;
+        }
+        return null;
     }
-
-    while (currentNode !== null) {
-      nodeValues.push(currentNode.value[1]);
-      currentNode = currentNode.nextNode;
+    keysFromList(item) {
+        const nodeValues = [];
+        let currentNode = item.head;
+        while (currentNode) {
+            if (currentNode.value !== null) {
+                nodeValues.push(currentNode.key);
+            }
+            currentNode = currentNode.nextNode;
+        }
+        return nodeValues;
     }
-
-    return nodeValues;
-  }
-
-  keyValueFromList(item) {
-    let nodeValues = [];
-    let currentNode = item.head;
-    if (currentNode === null) {
-      return;
+    valuesFromList(item) {
+        const nodeValues = [];
+        let currentNode = item.head;
+        while (currentNode) {
+            if (currentNode.value !== null) {
+                nodeValues.push(currentNode.value);
+            }
+            currentNode = currentNode.nextNode;
+        }
+        return nodeValues;
     }
-
-    while (currentNode !== null) {
-      nodeValues.push(currentNode.value);
-      currentNode = currentNode.nextNode;
+    keyValueFromList(item) {
+        let nodeValues = [];
+        let currentNode = item.head;
+        while (currentNode) {
+            if (currentNode.key !== null) {
+                nodeValues.push([currentNode.key, currentNode.value]);
+            }
+            currentNode = currentNode.nextNode;
+        }
+        return nodeValues;
     }
-
-    return nodeValues;
-  }
-
-  removeFromList(key, index, hashBucket) {
-    if (hashBucket[index]) {
-      let currentNode = hashBucket[index].head;
-
-      if (currentNode.value[0] === key) {
-        hashBucket[index].head = currentNode.nextNode;
-        return true;
-      }
-      currentNode = currentNode.nextNode;
-
-      while (currentNode.value[0] !== key) {
-        currentNode = currentNode.nextNode;
-      }
-      if (currentNode.value[0] === key) {
-        currentNode = currentNode.nextNode;
-        hashBucket[index] = currentNode;
-
-        return true;
-      }
+    removeFromList(key) {
+        if (this.head === null) {
+            return false;
+        }
+        if (this.head.key === key) {
+            this.head = this.head.nextNode;
+            return true;
+        }
+        let currentNode = this.head;
+        while (currentNode.nextNode && currentNode.nextNode.key !== key) {
+            currentNode = currentNode.nextNode;
+        }
+        if (currentNode.nextNode && currentNode.nextNode.key === key) {
+            currentNode.nextNode = currentNode.nextNode.nextNode;
+            return true;
+        }
+        return false;
     }
-    return false;
-  }
 }
-
 export class Node {
-  constructor(value = null) {
-    this.value = value;
-    this.nextNode = null;
-  }
+    key;
+    value;
+    nextNode;
+    constructor(key, value) {
+        this.key = key;
+        this.value = value;
+        this.nextNode = null;
+    }
 }
